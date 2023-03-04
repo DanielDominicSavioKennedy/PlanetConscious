@@ -3,16 +3,27 @@ from flask_sqlalchemy import SQLAlchemy
 import datetime
 from flask_login import UserMixin, LoginManager, login_user, logout_user, login_required, current_user
 from functools import wraps
+from flask_bootstrap import Bootstrap
+from flask_ckeditor import CKEditor, CKEditorField
+from flask_gravatar import Gravatar
+from flask_wtf import FlaskForm
+from wtforms import StringField, SubmitField, PasswordField
+from wtforms.validators import DataRequired, URL, Email
 
 
 app = Flask(__name__)
 
-app.config["SECRET_KEY"] = "WebsiteMadeByWebLaunch2022"
+app.config["SECRET_KEY"] = "ThisIsOurPlanetLet'sSaveIt"
 
 # Database config
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///database.db"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+ckeditor = CKEditor(app)
+Bootstrap(app)
 db = SQLAlchemy(app)
+
+
+
 class User(UserMixin, db.Model):
     __tablename__ = "Users"
     id = db.Column(db.Integer, primary_key=True)
@@ -20,7 +31,21 @@ class User(UserMixin, db.Model):
     email = db.Column(db.Text, unique=True, nullable=False)
     password = db.Column(db.Text, nullable=False)
 
+class BlogPost(db.Model):
+    __tablename__ = "blog_posts"
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(250), unique=True, nullable=False)
+    subtitle = db.Column(db.String(250), nullable=False)
+    body = db.Column(db.Text, nullable=False)
+
 db.create_all()
+
+# Forms
+class CreatePostForm(FlaskForm):
+    title = StringField("Blog Post Title", validators=[DataRequired()])
+    subtitle = StringField("Subtitle", validators=[DataRequired()])
+    body = CKEditorField("Blog Content", validators=[DataRequired()])
+    submit = SubmitField("Submit Post")
 
 # Login Manager
 login_manager = LoginManager()
@@ -78,7 +103,33 @@ def profile():
 @app.route("/blog")
 @login_required
 def blog():
-    return render_template("blogs.html", current_user=current_user)
+    try:
+        posts = BlogPost.query.all()
+    except:
+        posts = None
+    return render_template("blogs.html", current_user=current_user, all_posts=posts)
+
+@app.route("/add-blog", methods=["GET", "POST"])
+@login_required
+def add_blog():
+    form = CreatePostForm()
+    if form.validate_on_submit():
+        new_post = BlogPost(
+            title=form.title.data,
+            subtitle=form.subtitle.data,
+            body=form.body.data,
+        )
+        db.session.add(new_post)
+        db.session.commit()
+        return redirect(url_for('blog'))
+    return render_template("add-blog.html", form=form)
+
+@app.route("/post/<int:post_id>")
+def show_post(post_id):
+    requested_post = BlogPost.query.get(post_id)
+    return render_template("post.html", post=requested_post)
+
+# User-Authentication
 
 @app.route("/", methods=["GET", "POST"])
 def register():
