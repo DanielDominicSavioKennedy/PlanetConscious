@@ -1,6 +1,5 @@
 from flask import *
 from flask_sqlalchemy import SQLAlchemy
-import datetime
 from flask_login import UserMixin, LoginManager, login_user, logout_user, login_required, current_user
 from functools import wraps
 from flask_bootstrap import Bootstrap
@@ -9,7 +8,8 @@ from flask_gravatar import Gravatar
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, PasswordField
 from wtforms.validators import DataRequired, URL, Email
-
+import pandas as pd
+from pprint import pprint
 
 app = Flask(__name__)
 
@@ -55,7 +55,12 @@ login_manager.init_app(app)
 def load_user(user_id):
     return User.query.get(user_id)
 
-activites = []
+queries = []
+query_data = pd.read_csv("data.csv", error_bad_lines=False, header=None, index_col=0, squeeze = True)
+query_data =query_data.drop_duplicates()
+query_data = query_data.to_dict()
+pprint(query_data)
+
 
 @app.route("/home")
 @login_required
@@ -66,29 +71,14 @@ def home():
 @login_required
 def table():
     if request.method == "POST":
-        status = request.form.get("status")
-        time_status, date_status = '', ''
-        if status == "2":
-            now = datetime.datetime.now().time()
-            time = now.strftime("%H:%M:%S")
-            now = datetime.datetime.now().date()
-            date = now.strftime("%Y-%m-%d")
-            time_status=time
-            date_status = date
-        elif status == "1":
-            time_status, date_status = "Pending", "Pending"
-        else:
-            time_status, date_status = "Incomplete", "Incomplete"
-
-        activites.append({
-            "s.no":len(activites)+5,
-            "activity":request.form.get("activity"), 
-            "time":time_status,
-            "date":date_status
+        query = request.form.get("query").title()
+        queries.append({
+            "s.no":len(queries)+3,
+            "query":query,
+            "result":query_data[query]
             })
         return redirect("table")
-    print(activites)
-    return render_template("tables-general.html", current_user=current_user, activites=activites)
+    return render_template("tables-general.html", current_user=current_user, queries=queries)
 
 @app.route("/chart")
 @login_required
