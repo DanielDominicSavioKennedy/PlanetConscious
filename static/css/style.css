@@ -299,7 +299,9 @@ h6 {
   outline: 0;
   box-shadow: none;
 }
-
+svg{
+  color:  rgba(0, 78, 22, 1);
+}
 .accordion-button:not(.collapsed) {
   color: #012970;
   background-color: #f6f9ff;

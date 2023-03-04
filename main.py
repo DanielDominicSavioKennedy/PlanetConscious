@@ -59,7 +59,7 @@ queries = []
 query_data = pd.read_csv("data.csv", error_bad_lines=False, header=None, index_col=0, squeeze = True)
 query_data =query_data.drop_duplicates()
 query_data = query_data.to_dict()
-pprint(query_data)
+
 
 
 @app.route("/home")
