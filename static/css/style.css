@@ -19,7 +19,7 @@ body {
 }
 
 a {
-  color: #4154f1;
+  color: #5cd749;
   text-decoration: none;
 }
 
@@ -66,6 +66,9 @@ h6 {
   color: #012970;
 }
 
+.bi{
+  color: rgba(78, 203, 113, 1);
+}
 /*--------------------------------------------------------------
 # Back to top button
 --------------------------------------------------------------*/
@@ -700,7 +703,7 @@ h6 {
   align-items: center;
   font-size: 15px;
   font-weight: 600;
-  color: #4154f1;
+  color: rgba(78, 203, 113, 1);
   transition: 0.3;
   background: #f6f9ff;
   padding: 10px 15px;
@@ -710,7 +713,7 @@ h6 {
 .sidebar-nav .nav-link i {
   font-size: 16px;
   margin-right: 10px;
-  color: #4154f1;
+  color: rgba(78, 203, 113, 1);
 }
 
 .sidebar-nav .nav-link.collapsed {

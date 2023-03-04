@@ -37,8 +37,12 @@
 
     <div class="d-flex align-items-center justify-content-between">
       <a href="{{ url_for('home') }}" class="logo d-flex align-items-center">
-        <img src="{{ url_for('static', filename='img/logo.png') }}" alt="">
-        <span class="d-none d-lg-block">PlanetConscious</span>
+        <svg width="40" height="40" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M10 19C14.9706 19 19 14.9706 19 10C19 5.02944 14.9706 1 10 1C5.02944 1 1 5.02944 1 10C1 14.9706 5.02944 19 10 19Z" stroke="#4ECB71" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M11.5 4.00001H12C12.5304 4.00001 13.0391 3.7893 13.4142 3.41423C13.7893 3.03915 14 2.53044 14 2.00001C6.4 -0.799988 2.5 4.50001 1.5 7.50001L5.667 12.593C5.882 12.856 6 13.186 6 13.526C6 14.34 6.673 15 7.487 15C8.315 15 9 15.672 9 16.5V19C11.167 18.833 15.8 17.8 17 15H16C15.4696 15 14.9609 14.7893 14.5858 14.4142C14.2107 14.0392 14 13.5304 14 13C14 12.4696 13.7893 11.9609 13.4142 11.5858C13.0391 11.2107 12.5304 11 12 11H10C9.46957 11 8.96086 10.7893 8.58579 10.4142C8.21071 10.0392 8 9.53044 8 9.00001V8.00001C8 7.7348 8.10536 7.48044 8.29289 7.29291C8.48043 7.10537 8.73478 7.00001 9 7.00001C9.26522 7.00001 9.51957 6.89465 9.70711 6.70712C9.89464 6.51958 10 6.26523 10 6.00001V5.50001C10 5.10219 10.158 4.72066 10.4393 4.43935C10.7206 4.15805 11.1022 4.00001 11.5 4.00001Z" fill="#4ECB71" stroke="#4ECB71" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          
+        <span class="d-none d-lg-block" style="color:#5cd749;">PlanetConscious</span>
       </a>
       <i class="bi bi-list toggle-sidebar-btn"></i>
     </div><!-- End Logo -->
@@ -52,79 +56,6 @@
 
     <nav class="header-nav ms-auto">
       <ul class="d-flex align-items-center">
-
-        <li class="nav-item d-block d-lg-none">
-          <a class="nav-link nav-icon search-bar-toggle " href="#">
-            <i class="bi bi-search"></i>
-          </a>
-        </li><!-- End Search Icon-->
-
-        <li class="nav-item dropdown">
-
-          <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
-            <i class="bi bi-bell"></i>
-            <span class="badge bg-primary badge-number">2</span>
-          </a><!-- End Notification Icon -->
-
-          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
-            <li class="dropdown-header">
-              You have 2 new notifications
-              <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li class="notification-item">
-              <i class="bi bi-exclamation-circle text-warning"></i>
-              <div>
-                <h4>Streak</h4>
-                <p>Hey,Naveen you're about miss the streak today...</p>
-                <p>3 min. ago</p>
-              </div>
-            </li>
-
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-          
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li class="notification-item">
-              <i class="bi bi-info-circle text-primary"></i>
-              <div>
-                <h4>Activity</h4>
-                <p>Naveen,You had a Great time today than yesterday.. </p>
-                <p>14 hrs. ago</p>
-              </div>
-            </li>
-
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-            <li class="dropdown-footer">
-              <a href="#">Show all notifications</a>
-            </li>
-
-          </ul><!-- End Notification Dropdown Items -->
-
-        </li><!-- End Notification Nav -->
-
-        <li class="nav-item dropdown">
-
-          <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
-            <i class="bi bi-fire"></i>
-            <span class="badge bg-success badge-number">3</span>
-          </a><!-- End Messages Icon -->
-
-        </li><!-- End Messages Nav -->
 
         <li class="nav-item dropdown pe-3">
 
