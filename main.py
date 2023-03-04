@@ -9,7 +9,6 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, PasswordField
 from wtforms.validators import DataRequired, URL, Email
 import pandas as pd
-from pprint import pprint
 
 app = Flask(__name__)
 
@@ -59,7 +58,6 @@ queries = []
 query_data = pd.read_csv("data.csv", error_bad_lines=False, header=None, index_col=0, squeeze = True)
 query_data =query_data.drop_duplicates()
 query_data = query_data.to_dict()
-pprint(query_data)
 
 
 @app.route("/home")
@@ -72,11 +70,14 @@ def home():
 def table():
     if request.method == "POST":
         query = request.form.get("query").title()
-        queries.append({
-            "s.no":len(queries)+3,
-            "query":query,
-            "result":query_data[query]
-            })
+        try:
+            queries.append({
+                "s.no":len(queries)+3,
+                "query":query,
+                "result":query_data[query]
+                })
+        except:
+            flash("AI couldn't find the query")
         return redirect("table")
     return render_template("tables-general.html", current_user=current_user, queries=queries)
 
