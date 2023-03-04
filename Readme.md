@@ -1,1 +1,1 @@
-### A mental health webApp we built at Elite Hackathon Challenge
+### An Eco-friendly web app we built at St.Fracis Hackathon 
